@@ -202,10 +202,22 @@ public class MultiBoxTracker {
     }
   }
 
+  public String returnRecognitions(){
+   String result = "";
+
+    for (TrackedRecognition element:this.trackedObjects){
+      result += element.title;
+    }
+
+   return result;
+  }
+
   private static class TrackedRecognition {
     RectF location;
     float detectionConfidence;
     int color;
     String title;
   }
+
+
 }

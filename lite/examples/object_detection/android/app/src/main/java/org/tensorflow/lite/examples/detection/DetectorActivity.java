@@ -138,8 +138,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
           @Override
           public void drawCallback(final Canvas canvas) {
             tracker.draw(canvas);
+             detectedLabels.setText(tracker.returnRecognitions());
             if (isDebug()) {
               tracker.drawDebug(canvas);
+
             }
           }
         });
@@ -249,6 +251,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     runInBackground(
         () -> {
           try {
+
             detector.setUseNNAPI(isChecked);
           } catch (UnsupportedOperationException e) {
             LOGGER.e(e, "Failed to set \"Use NNAPI\".");
@@ -264,4 +267,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   protected void setNumThreads(final int numThreads) {
     runInBackground(() -> detector.setNumThreads(numThreads));
   }
+
+
 }

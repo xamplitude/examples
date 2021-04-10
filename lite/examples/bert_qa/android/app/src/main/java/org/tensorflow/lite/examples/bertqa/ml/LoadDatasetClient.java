@@ -50,6 +50,7 @@ public class LoadDatasetClient {
       InputStream is = context.getAssets().open(JSON_DIR);
       JsonReader reader = new JsonReader(new InputStreamReader(is));
       HashMap<String, List<List<String>>> map = new Gson().fromJson(reader, HashMap.class);
+
       List<List<String>> jsonTitles = map.get("titles");
       List<List<String>> jsonContents = map.get("contents");
       List<List<String>> jsonQuestions = map.get("questions");
