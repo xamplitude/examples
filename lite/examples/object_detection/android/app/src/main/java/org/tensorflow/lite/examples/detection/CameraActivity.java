@@ -302,6 +302,7 @@ public abstract class CameraActivity extends AppCompatActivity
   public synchronized void onStart() {
     LOGGER.d("onStart " + this);
     super.onStart();
+
     textToSpeech =
             new TextToSpeech(
                     this,
@@ -546,10 +547,13 @@ public abstract class CameraActivity extends AppCompatActivity
         threadsTextView.setText(String.valueOf(numThreads));
         setNumThreads(numThreads);
       }
-      case R.id.listDetections:
+      case R.id.listDetections:{
+        detectedLabels.setText("");
         for (String element : DetectorActivity.set)
           detectedLabels.append(element + " ");
         textToSpeech.speak(detectedLabels.getText(), TextToSpeech.QUEUE_FLUSH, null, detectedLabels.getText().toString());
+      }
+
 
     }
 

@@ -205,12 +205,10 @@ public class MultiBoxTracker {
   }
 
   public HashSet<String> returnRecognitions(){
-   
     HashSet<String> set=  new HashSet<>();
     for (TrackedRecognition element:this.trackedObjects){
       set.add(element.title) ;
     }
-
    return set;
   }
 
