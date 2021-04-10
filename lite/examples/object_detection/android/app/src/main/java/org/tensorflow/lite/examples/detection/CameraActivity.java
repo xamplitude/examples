@@ -108,9 +108,9 @@ public abstract class CameraActivity extends AppCompatActivity
       requestPermission();
     }
 
-    threadsTextView = findViewById(R.id.threads);
+   /* threadsTextView = findViewById(R.id.threads);
     plusImageView = findViewById(R.id.plus);
-    minusImageView = findViewById(R.id.minus);
+    minusImageView = findViewById(R.id.minus);*/
     displayList = findViewById(R.id.listDetections);
     apiSwitchCompat = findViewById(R.id.api_info_switch);
     bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
@@ -165,14 +165,14 @@ public abstract class CameraActivity extends AppCompatActivity
           public void onSlide(@NonNull View bottomSheet, float slideOffset) {}
         });
 
-    frameValueTextView = findViewById(R.id.frame_info);
+/*    frameValueTextView = findViewById(R.id.frame_info);
     cropValueTextView = findViewById(R.id.crop_info);
-    inferenceTimeTextView = findViewById(R.id.inference_info);
+    inferenceTimeTextView = findViewById(R.id.inference_info);*/
     detectedLabels = findViewById(R.id.detectedLabels);
     apiSwitchCompat.setOnCheckedChangeListener(this);
-
+/*
     plusImageView.setOnClickListener(this);
-    minusImageView.setOnClickListener(this);
+    minusImageView.setOnClickListener(this);*/
     displayList.setOnClickListener(this);
   }
 
@@ -527,7 +527,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
     switch  (v.getId()){
 
-      case R.id.plus:
+   /*   case R.id.plus:
       {
         String threads = threadsTextView.getText().toString().trim();
         int numThreads = Integer.parseInt(threads);
@@ -546,7 +546,7 @@ public abstract class CameraActivity extends AppCompatActivity
         numThreads--;
         threadsTextView.setText(String.valueOf(numThreads));
         setNumThreads(numThreads);
-      }
+      }*/
       case R.id.listDetections:{
         detectedLabels.setText("");
         for (String element : DetectorActivity.set)
@@ -559,7 +559,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
   }
 
-  protected void showFrameInfo(String frameInfo) {
+/*  protected void showFrameInfo(String frameInfo) {
     frameValueTextView.setText(frameInfo);
   }
 
@@ -569,7 +569,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
   protected void showInference(String inferenceTime) {
     inferenceTimeTextView.setText(inferenceTime);
-  }
+  }*/
 
   protected abstract void processImage();
 
