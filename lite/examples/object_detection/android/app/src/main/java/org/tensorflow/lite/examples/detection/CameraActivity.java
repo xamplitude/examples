@@ -82,7 +82,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
   protected TextView frameValueTextView, cropValueTextView, inferenceTimeTextView, detectedLabels;
   protected ImageView bottomSheetArrowImageView;
-  private ImageView plusImageView, minusImageView;
+  private ImageView plusImageView, minusImageView, displayList;
   private SwitchCompat apiSwitchCompat;
   private TextView threadsTextView;
 
@@ -106,6 +106,7 @@ public abstract class CameraActivity extends AppCompatActivity
     threadsTextView = findViewById(R.id.threads);
     plusImageView = findViewById(R.id.plus);
     minusImageView = findViewById(R.id.minus);
+    displayList = findViewById(R.id.listDetections);
     apiSwitchCompat = findViewById(R.id.api_info_switch);
     bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
     gestureLayout = findViewById(R.id.gesture_layout);
@@ -167,6 +168,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
     plusImageView.setOnClickListener(this);
     minusImageView.setOnClickListener(this);
+    displayList.setOnClickListener(this);
   }
 
   protected int[] getRgbBytes() {
@@ -505,23 +507,36 @@ public abstract class CameraActivity extends AppCompatActivity
 
   @Override
   public void onClick(View v) {
-    if (v.getId() == R.id.plus) {
-      String threads = threadsTextView.getText().toString().trim();
-      int numThreads = Integer.parseInt(threads);
-      if (numThreads >= 9) return;
-      numThreads++;
-      threadsTextView.setText(String.valueOf(numThreads));
-      setNumThreads(numThreads);
-    } else if (v.getId() == R.id.minus) {
-      String threads = threadsTextView.getText().toString().trim();
-      int numThreads = Integer.parseInt(threads);
-      if (numThreads == 1) {
-        return;
+
+
+    switch  (v.getId()){
+
+      case R.id.plus:
+      {
+        String threads = threadsTextView.getText().toString().trim();
+        int numThreads = Integer.parseInt(threads);
+        if (numThreads >= 9) return;
+        numThreads++;
+        threadsTextView.setText(String.valueOf(numThreads));
+        setNumThreads(numThreads);
       }
-      numThreads--;
-      threadsTextView.setText(String.valueOf(numThreads));
-      setNumThreads(numThreads);
+      case R.id.minus:
+      {
+        String threads = threadsTextView.getText().toString().trim();
+        int numThreads = Integer.parseInt(threads);
+        if (numThreads == 1) {
+          return;
+        }
+        numThreads--;
+        threadsTextView.setText(String.valueOf(numThreads));
+        setNumThreads(numThreads);
+      }
+      case R.id.listDetections:
+        for (String element : DetectorActivity.set)
+          detectedLabels.append(element + " ");
+
     }
+
   }
 
   protected void showFrameInfo(String frameInfo) {

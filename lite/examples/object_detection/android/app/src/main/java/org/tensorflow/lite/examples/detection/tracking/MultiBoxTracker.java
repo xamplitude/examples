@@ -27,6 +27,8 @@ import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.TypedValue;
+
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -202,14 +204,14 @@ public class MultiBoxTracker {
     }
   }
 
-  public String returnRecognitions(){
-   String result = "";
-
+  public HashSet<String> returnRecognitions(){
+   
+    HashSet<String> set=  new HashSet<>();
     for (TrackedRecognition element:this.trackedObjects){
-      result += element.title;
+      set.add(element.title) ;
     }
 
-   return result;
+   return set;
   }
 
   private static class TrackedRecognition {

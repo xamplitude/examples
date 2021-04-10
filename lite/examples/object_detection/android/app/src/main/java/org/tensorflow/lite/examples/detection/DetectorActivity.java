@@ -29,9 +29,12 @@ import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
 import org.tensorflow.lite.examples.detection.customview.OverlayView.DrawCallback;
@@ -81,6 +84,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private MultiBoxTracker tracker;
 
   private BorderedText borderedText;
+  public static   HashSet<String> set = new HashSet<>();
 
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
@@ -138,7 +142,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
           @Override
           public void drawCallback(final Canvas canvas) {
             tracker.draw(canvas);
-             detectedLabels.setText(tracker.returnRecognitions());
+          HashSet<String> instanceSet;
+          instanceSet = tracker.returnRecognitions();
+          for (String element : instanceSet)
+            set.add(element);
+  /*          for (String element : set)
+             detectedLabels.append(element + " ");*/
             if (isDebug()) {
               tracker.drawDebug(canvas);
 
@@ -148,6 +157,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     tracker.setFrameConfiguration(previewWidth, previewHeight, sensorOrientation);
   }
+
+
 
   @Override
   protected void processImage() {
