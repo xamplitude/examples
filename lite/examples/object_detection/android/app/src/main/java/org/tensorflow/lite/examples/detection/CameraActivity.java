@@ -559,12 +559,40 @@ public abstract class CameraActivity extends AppCompatActivity
         for (String element : DetectorActivity.set)
           detectedLabels.append(element + " ");
         textToSpeech.speak(detectedLabels.getText(), TextToSpeech.QUEUE_FLUSH, null, detectedLabels.getText().toString());
+        break;
       }
       case R.id.saveDetections:{
         for (String element : DetectorActivity.set){
+    SQLLiteHelper dao = new SQLLiteHelper(this);
+    dao.addDetection(element);
 
         }
+        detectedLabels.setText("");
+        detectedLabels.setText("Detections saved");
+        break;
       }
+      case R.id.loadHistory:{
+
+          SQLLiteHelper dao = new SQLLiteHelper(this);
+
+          detectedLabels.setText("");
+        for (String element : dao.getAllDetections())
+          detectedLabels.append(element + " ");
+        break;
+      }
+
+      case R.id.delete:{
+
+
+          SQLLiteHelper dao = new SQLLiteHelper(this);
+          dao.deleteAllDetections();
+          detectedLabels.setText("");
+          detectedLabels.setText("All detections deleted");
+break;
+
+
+      }
+
 
 
     }

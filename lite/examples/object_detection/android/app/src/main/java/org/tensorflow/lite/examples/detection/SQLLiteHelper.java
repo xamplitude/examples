@@ -31,8 +31,7 @@ public class SQLLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + DETECTIONS + "("
-                + ID + " INTEGER PRIMARY KEY," + TITLE + " TEXT"
-                + ")";
+                + ID + " INTEGER PRIMARY KEY," + TITLE + " TEXT" + ")";
 
         db.execSQL(sql);
     }
@@ -44,11 +43,11 @@ public class SQLLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addDetection(FoundObject object){
+    public void addDetection(String object){
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TITLE,object.getTitle());
+        contentValues.put(TITLE,object);
 
         db.insert(DETECTIONS,null,contentValues);
 
@@ -83,27 +82,25 @@ public class SQLLiteHelper extends SQLiteOpenHelper {
         return object;
     }
 
-    public List<FoundObject> getAllNotes(){
-        List<FoundObject> noteList = new ArrayList<>();
+    public List<String> getAllDetections(){
+        List<String> detectionList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
         String sql = "SELECT * FROM " + DETECTIONS;
         Cursor cursor = db.rawQuery(sql,null);
 
-        FoundObject object = null;
+        String object = null;
         if(cursor.moveToFirst()){
             do{
-                object = new FoundObject();
-                object.setId(cursor.getInt(0));
-                object.setTitle(cursor.getString(1));
-                object.setContent(cursor.getString(2));
-                noteList.add(object);
+             object=cursor.getString(1);
+
+                detectionList.add(object);
             }
             while (cursor.moveToNext());
         }
 
         db.close();
-        return noteList;
+        return detectionList;
     }
 
     public void updateDetection(FoundObject object){
