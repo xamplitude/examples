@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -89,4 +90,28 @@
         android:layout_weight="1"
         android:src="@drawable/ic_baseline_add"
         app:srcCompat="@drawable/ic_baseline_add" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="72dp" >
+
+        <Button
+            android:id="@+id/saveDetections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save detections" />
+
+        <Button
+            android:id="@+id/loadHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Load history" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+    </TableRow>
+
 </LinearLayout>

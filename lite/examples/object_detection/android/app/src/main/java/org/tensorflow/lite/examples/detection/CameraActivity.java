@@ -44,6 +44,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -87,6 +88,7 @@ public abstract class CameraActivity extends AppCompatActivity
   protected TextView frameValueTextView, cropValueTextView, inferenceTimeTextView, detectedLabels;
   protected ImageView bottomSheetArrowImageView;
   private ImageView plusImageView, minusImageView, displayList;
+  private Button saveDetections, loadHistory, delete;
   private SwitchCompat apiSwitchCompat;
   private TextView threadsTextView;
   private TextToSpeech textToSpeech;
@@ -98,9 +100,9 @@ public abstract class CameraActivity extends AppCompatActivity
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     setContentView(R.layout.tfe_od_activity_camera);
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-    getSupportActionBar().setDisplayShowTitleEnabled(false);
+   /* Toolbar toolbar = findViewById(R.id.toolbar);*/
+   /* setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
     if (hasPermission()) {
       setFragment();
@@ -112,6 +114,9 @@ public abstract class CameraActivity extends AppCompatActivity
     plusImageView = findViewById(R.id.plus);
     minusImageView = findViewById(R.id.minus);*/
     displayList = findViewById(R.id.listDetections);
+    saveDetections = findViewById(R.id.saveDetections);
+    loadHistory = findViewById(R.id.loadHistory);
+    delete= findViewById(R.id.delete);
     apiSwitchCompat = findViewById(R.id.api_info_switch);
     bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
     gestureLayout = findViewById(R.id.gesture_layout);
@@ -170,11 +175,13 @@ public abstract class CameraActivity extends AppCompatActivity
     inferenceTimeTextView = findViewById(R.id.inference_info);*/
     detectedLabels = findViewById(R.id.detectedLabels);
     apiSwitchCompat.setOnCheckedChangeListener(this);
-/*
-    plusImageView.setOnClickListener(this);
-    minusImageView.setOnClickListener(this);*/
+
+    saveDetections.setOnClickListener(this);
+    loadHistory.setOnClickListener(this);
+    delete.setOnClickListener(this);
     displayList.setOnClickListener(this);
   }
+
 
   protected int[] getRgbBytes() {
     imageConverter.run();
@@ -552,6 +559,11 @@ public abstract class CameraActivity extends AppCompatActivity
         for (String element : DetectorActivity.set)
           detectedLabels.append(element + " ");
         textToSpeech.speak(detectedLabels.getText(), TextToSpeech.QUEUE_FLUSH, null, detectedLabels.getText().toString());
+      }
+      case R.id.saveDetections:{
+        for (String element : DetectorActivity.set){
+
+        }
       }
 
 

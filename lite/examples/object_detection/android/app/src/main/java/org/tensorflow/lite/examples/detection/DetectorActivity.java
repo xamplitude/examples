@@ -140,13 +140,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     trackingOverlay.addCallback(
         new DrawCallback() {
           @Override
-          public void drawCallback(final Canvas canvas) { tracker.draw(canvas);
+          public void drawCallback(final Canvas canvas) {
+            tracker.draw(canvas);
           HashSet<String> instanceSet;
           instanceSet = tracker.returnRecognitions();
+
           for (String element : instanceSet)
             set.add(element);
-  /*          for (String element : set)
-             detectedLabels.append(element + " ");*/
             if (isDebug()) {
               tracker.drawDebug(canvas);
 
