@@ -557,7 +557,7 @@ public abstract class CameraActivity extends AppCompatActivity
       case R.id.listDetections:{
         detectedLabels.setText("");
         for (String element : DetectorActivity.set)
-          detectedLabels.append(element + " ");
+          detectedLabels.append(element + "\n");
         textToSpeech.speak(detectedLabels.getText(), TextToSpeech.QUEUE_FLUSH, null, detectedLabels.getText().toString());
         break;
       }
@@ -577,7 +577,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
           detectedLabels.setText("");
         for (String element : dao.getAllDetections())
-          detectedLabels.append(element + " ");
+          detectedLabels.append(element + "\n");
         break;
       }
 
